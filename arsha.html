@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semangat UTBK Arsha!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Neue', cursive;
+      background: linear-gradient(135deg, #ffb6c1, #ff69b4, #ff85a2, #ffc0cb);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      overflow-x: hidden;
+      color: #fff;
+      text-align: center;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1, h2 {
+      font-family: 'Fredoka One', cursive;
+      text-shadow: 3px 3px 0 #ff1493;
+      margin-bottom: 20px;
+    }
+
+    section {
+      padding: 50px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animasi Karakter Lucu */
+    .character {
+      position: absolute;
+      z-index: 10;
+      image-rendering: pixelated;
+    }
+
+    .panda {
+      width: 100px;
+      bottom: 20px;
+      left: 5%;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .cat {
+      width: 80px;
+      top: 20%;
+      right: 10%;
+      animation: spin 4s linear infinite;
+    }
+
+    .bubble {
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      opacity: 0.6;
+      animation: floatUp 5s linear infinite;
+    }
+
+    /* Animasi Khusus */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes wobble {
+      0%, 100% { transform: rotate(-5deg); }
+      50% { transform: rotate(5deg); }
+    }
+
+    /* Tombol Super Lucu */
+    .btn {
+      background: #ff1493;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      margin: 20px auto;
+      cursor: pointer;
+      font-family: 'Fredoka One', cursive;
+      box-shadow: 0 5px 15px rgba(255,20,147,0.4);
+      transition: all 0.3s;
+      animation: pulse 1.5s infinite;
+    }
+
+    .btn:hover {
+      transform: scale(1.1) rotate(5deg);
+      background: #ff69b4;
+    }
+
+    /* Efek Khusus */
+    .emoji-rain {
+      position: fixed;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .character {
+        width: 60px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Karakter Lucu -->
+<img src="https://i.ibb.co/6n0hL3V/pixel-panda.png" class="character panda" alt="Panda Lucu">
+<img src="https://i.ibb.co/0jq3R8y/pixel-cat.png" class="character cat" alt="Kucing Lucu">
+
+<!-- Konten Utama -->
+<section>
+  <h1 style="font-size: 3rem;">ARSHAAA UDAH SIAP UTBK!! 🎉</h1>
+  <p style="font-size: 1.5rem;">Besok kamu bakal ngerjain soal dengan gemesin banget!</p>
+  
+  <button class="btn" id="partyBtn">KLIK BUAT PARTY! 🎊</button>
+  
+  <div id="dynamicText" style="font-size: 1.8rem; margin: 30px auto;"></div>
+</section>
+
+<section style="background: rgba(255,255,255,0.2);">
+  <h2>🐾 SEMANGAT 1000%!</h2>
+  <p>Kamu itu:</p>
+  <p>💖 Lebih kuat dari kopi pagi</p>
+  <p>✨ Lebih cerdas dari kalkulator</p>
+  <p>🚀 Lebih cepat dari proktor!</p>
+</section>
+
+<!-- Animasi Tambahan -->
+<div id="emojiContainer"></div>
+
+<script>
+  // Bubble generator
+  function createBubbles() {
+    const colors = ['#ff69b4', '#ff1493', '#ff85a2', '#ffb6c1'];
+    const section = document.querySelector('section');
+    
+    setInterval(() => {
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble');
+      bubble.style.width = Math.random() * 50 + 20 + 'px';
+      bubble.style.height = bubble.style.width;
+      bubble.style.left = Math.random() * 100 + 'vw';
+      bubble.style.background = colors[Math.floor(Math.random() * colors.length)];
+      bubble.style.animationDuration = Math.random() * 3 + 3 + 's';
+      
+      section.appendChild(bubble);
+      
+      // Remove after animation
+      setTimeout(() => {
+        bubble.remove();
+      }, 8000);
+    }, 300);
+  }
+
+  // Dynamic text
+  const texts = [
+    "KAMU PASTI BISA!",
+    "GO ARSHA GO!",
+    "UTBK? EZ BANGET!",
+    "AKU PERCAYA SAMA KAMU!",
+    "SEMANGAT YAAA! 💪"
+  ];
+  
+  function animateText() {
+    const element = document.getElementById('dynamicText');
+    let counter = 0;
+    
+    setInterval(() => {
+      element.style.transform = 'scale(0)';
+      setTimeout(() => {
+        element.textContent = texts[counter % texts.length];
+        element.style.transform = 'scale(1)';
+        counter++;
+      }, 500);
+    }, 2000);
+  }
+
+  // Party button effect
+  document.getElementById('partyBtn').addEventListener('click', function() {
+    this.textContent = "YEEEE PARTY!!! 🎉";
+    
+    // Create emoji rain
+    const emojis = ['🌈', '✨', '🎊', '🎁', '🍭', '🧁', '🐾'];
+    for (let i = 0; i < 50; i++) {
+      const emoji = document.createElement('div');
+      emoji.classList.add('emoji-rain');
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.left = Math.random() * 100 + 'vw';
+      emoji.style.top = -50 + 'px';
+      emoji.style.fontSize = Math.random() * 20 + 10 + 'px';
+      emoji.style.animation = `fall ${Math.random() * 2 + 1}s linear forwards`;
+      
+      document.getElementById('emojiContainer').appendChild(emoji);
+      
+      // Remove after animation
+      setTimeout(() => {
+        emoji.remove();
+      }, 3000);
+    }
+  });
+
+  // Add falling animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes fall {
+      to { transform: translateY(100vh) rotate(360deg); }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Initialize
+  window.onload = function() {
+    createBubbles();
+    animateText();
+    
+    // Add wobble effect to headings
+    document.querySelectorAll('h1, h2').forEach(el => {
+      el.style.animation = 'wobble 2s ease-in-out infinite';
+    });
+  };
+</script>
+
+</body>
+</html>
